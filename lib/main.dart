@@ -12,18 +12,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Конвертер валюты',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        fontFamily: "Roboto"
       ),
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: const Text("Валюты"),
+          title: const Text("Конвертер валюты"),
         ),
         body: const MyHomePage()
       ),
+      debugShowCheckedModeBanner: false,
+      debugShowMaterialGrid: false,
     );
   }
 }
@@ -80,10 +83,14 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 100, left: 30),
+      padding: const EdgeInsets.only(top: 70, left: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Text("Конвертер валюты", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
+
+          SizedBox(height: 100,),
+
           DropdownButton<String>(
               value: baseCurrency,
               items: currencies.map((c) => DropdownMenuItem(child: Text(c.name), value: c.code)).toList(),
@@ -100,9 +107,13 @@ class _MyHomePageState extends State<MyHomePage> {
               }); check(); }
           ),
 
+          SizedBox(height: 30,),
+
+          Text("Курс:", style: TextStyle(fontSize: 20),),
+
           Text(
-              "Курс: ${exchangeRate?.toStringAsFixed(2) ?? "неизвестно"}",
-              style: TextStyle(fontSize: 30)
+              "${exchangeRate?.toStringAsFixed(2) ?? "..."}",
+              style: TextStyle(fontSize: 60)
           )
         ],
       ),
